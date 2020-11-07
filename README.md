@@ -1,14 +1,22 @@
 # Mafia-Game Backend
 
-[Example Article](https://www.strilliant.com/2019/01/27/how-to-setup-a-powerful-api-with-graphql-koa-and-mongodb/)
+Backend for [Mafia-Game](https://github.com/ReSenpai/mafia-game)
 
-[GraphQL URL](http://localhost:PORT/graphql)
+## Tech Stack:
 
-Query example
+- Koa(Node.js)
+- GraphQL
+- MongoDB
+
+## GraphQL:
+
+### url: localhost:PORT/graphql
+
+### Query example
 
 ```
 {
-	user(id: "USER_ID") {
+  user(id: "USER_ID") {
     name
   }
 }
@@ -25,3 +33,7 @@ Result:
   }
 }
 ```
+
+## Examples
+
+[How to setup a powerful API with GraphQL, Koa and MongoDB](https://www.strilliant.com/2019/01/27/how-to-setup-a-powerful-api-with-graphql-koa-and-mongodb/)
