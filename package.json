@@ -1,0 +1,20 @@
+{
+  "name": "mafia-game-backend",
+  "version": "0.1.0",
+  "description": "Backend for Mafia-Game",
+  "main": "index.js",
+  "author": "TicTak21",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "graphql": "^15.4.0",
+    "koa": "^2.13.0",
+    "koa-graphql": "^0.8.0",
+    "koa-mount": "^4.0.0",
+    "mongoose": "^5.10.13"
+  }
+}
