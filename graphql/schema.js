@@ -2,7 +2,7 @@ import graphql from 'graphql';
 const { GraphQLSchema, GraphQLObjectType, GraphQLString } = graphql;
 
 import userGraphQLType from './userType.js';
-import User from '../models/User.js';
+import User from '../models/user.js';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
