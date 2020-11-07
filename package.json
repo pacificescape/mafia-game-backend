@@ -6,8 +6,10 @@
   "author": "TicTak21",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -16,5 +18,8 @@
     "koa-graphql": "^0.8.0",
     "koa-mount": "^4.0.0",
     "mongoose": "^5.10.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

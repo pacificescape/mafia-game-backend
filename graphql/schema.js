@@ -1,6 +1,8 @@
-const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql');
-const userGraphQLType = require('./userType');
-const User = require('../models/User');
+import graphql from 'graphql';
+const { GraphQLSchema, GraphQLObjectType, GraphQLString } = graphql;
+
+import userGraphQLType from './userType.js';
+import User from '../models/user.js';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -15,6 +17,6 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
-module.exports = new GraphQLSchema({
+export default new GraphQLSchema({
   query: RootQuery,
 });

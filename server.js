@@ -1,9 +1,11 @@
-const Koa = require('koa');
-const mount = require('koa-mount');
-const graphqlHTTP = require('koa-graphql');
-const schema = require('./graphql/schema');
-const initDB = require('./database/database');
-require('dotenv').config();
+import Koa from 'koa';
+import mount from 'koa-mount';
+import graphqlHTTP from 'koa-graphql';
+import schema from './graphql/schema.js';
+import initDB from './database/index.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = new Koa();
 
@@ -21,6 +23,4 @@ app.use(
 
 app.listen(process.env.PORT || 5000);
 
-app.on('error', err => {
-  console.log(err.message);
-});
+app.on('error', ({ message }) => console.log(message));
