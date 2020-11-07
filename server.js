@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 
 // === env ===
 import dotenv from 'dotenv';
@@ -22,13 +23,14 @@ router
   .get('/', ctx => {
     ctx.body = 'Swagger here';
   })
-  .get('/users', ctx => {
-    ctx.body = 'Users here';
+  .get('/users', async ctx => {
+    ctx.body = `${ctx.request.method}: ${ctx.request.url}`;
   });
 
 app
   .use(router.routes())
   .use(router.allowedMethods())
+  .use(bodyParser())
   .use(
     mount(
       '/graphql',
