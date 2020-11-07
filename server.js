@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
+import logger from 'koa-logger';
 
 // === env ===
 import dotenv from 'dotenv';
@@ -28,6 +29,7 @@ router
   });
 
 app
+  .use(logger())
   .use(router.routes())
   .use(router.allowedMethods())
   .use(bodyParser())
