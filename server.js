@@ -1,5 +1,4 @@
 import Koa from 'koa';
-import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 
@@ -14,6 +13,9 @@ import schema from './graphql/schema.js';
 // === db ===
 import initDB from './database/index.js';
 
+// === routes ===
+import apiRouter from './routes/api.js';
+
 // === utils ===
 import { getPort } from './utils/index.js';
 
@@ -21,20 +23,11 @@ dotenv.config();
 initDB();
 
 const app = new Koa();
-const router = new Router({ prefix: '/api' });
-
-router
-  .get('/', ctx => {
-    ctx.body = 'Swagger here';
-  })
-  .get('/users', async ctx => {
-    ctx.body = `${ctx.request.method}: ${ctx.request.url}`;
-  });
 
 app
   .use(logger())
-  .use(router.routes())
-  .use(router.allowedMethods())
+  .use(apiRouter.routes())
+  .use(apiRouter.allowedMethods())
   .use(bodyParser())
   .use(
     mount(

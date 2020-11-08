@@ -2,7 +2,7 @@
   "name": "mafia-game-backend",
   "version": "0.1.0",
   "description": "Backend for Mafia-Game",
-  "main": "index.js",
+  "main": "server.js",
   "author": "TicTak21",
   "license": "MIT",
   "private": true,
