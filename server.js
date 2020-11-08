@@ -14,6 +14,9 @@ import schema from './graphql/schema.js';
 // === db ===
 import initDB from './database/index.js';
 
+// === utils ===
+import { getPort } from './utils/index.js';
+
 dotenv.config();
 initDB();
 
@@ -43,6 +46,10 @@ app
     ),
   );
 
-app.listen(process.env.PORT || 5000);
+app
+  .listen(getPort())
+  .on('listening', () =>
+    console.log(`=== Listening on: http://localhost:${getPort()}/api/ ===`),
+  );
 
 app.on('error', ({ message }) => console.log(message));
