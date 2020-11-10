@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
 const initDB = () => {
-  mongoose.connect(process.env.CONNECTION_STRING, {
+  mongoose.connect(process.env.CONNECTION_STRING || '', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 
   mongoose.connection.once('open', () => {
-    console.log('connected to database');
+    console.log('Connected to database');
   });
 };
 

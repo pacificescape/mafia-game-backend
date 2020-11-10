@@ -2,32 +2,32 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 
-// === env ===
-import dotenv from 'dotenv';
+// === controllers ===
+import appRouter from './controllers/app.controller';
 
 // === graphql ===
 import mount from 'koa-mount';
 import graphqlHTTP from 'koa-graphql';
 import schema from './graphql/schema.js';
 
-// === db ===
-import initDB from './database/index.js';
-
-// === routes ===
-import apiRouter from './routes/api.js';
+// === env ===
+import { config } from 'dotenv';
 
 // === utils ===
-import { getPort } from './utils/index.js';
+import { getPort } from './shared/utils/process.util';
 
-dotenv.config();
+// === db ===
+import initDB from './database/database';
+
+config();
 initDB();
 
 const app = new Koa();
 
 app
   .use(logger())
-  .use(apiRouter.routes())
-  .use(apiRouter.allowedMethods())
+  .use(appRouter.routes())
+  .use(appRouter.allowedMethods())
   .use(bodyParser())
   .use(
     mount(
@@ -42,7 +42,5 @@ app
 app
   .listen(getPort())
   .on('listening', () =>
-    console.log(`=== Listening on: http://localhost:${getPort()}/api/ ===`),
+    console.log(`Listening on: http://localhost:${getPort()}/api/`),
   );
-
-app.on('error', ({ message }) => console.log(message));

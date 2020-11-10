@@ -1,8 +1,6 @@
-import graphql from 'graphql';
-const { GraphQLSchema, GraphQLObjectType, GraphQLString } = graphql;
-
-import userGraphQLType from './userType.js';
-import User from '../models/user.js';
+import { GraphQLString, GraphQLObjectType, GraphQLSchema } from 'graphql';
+import userGraphQLType from './user.schema';
+import User from '../models/user.model';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',

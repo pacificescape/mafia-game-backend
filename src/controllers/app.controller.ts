@@ -1,8 +1,8 @@
 import Router from 'koa-router';
 
-const router = new Router({ prefix: '/api' });
+const appRouter = new Router({ prefix: '/api' });
 
-router
+appRouter
   .get('/', ctx => {
     ctx.body = 'Swagger here';
   })
@@ -10,4 +10,4 @@ router
     ctx.body = `${ctx.request.method}: ${ctx.request.url}`;
   });
 
-export default router;
+export default appRouter;
