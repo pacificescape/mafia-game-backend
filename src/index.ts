@@ -39,8 +39,7 @@ app
     ),
   );
 
-app
-  .listen(getPort())
-  .on('listening', () =>
-    console.log(`Listening on: http://localhost:${getPort()}/api/`),
-  );
+app.listen(getPort()).on('listening', () => {
+  console.log(`Listening on: http://localhost:${getPort()}/api/`);
+  console.log(`GraphQL on: http://localhost:${getPort()}/graphql/`);
+});
