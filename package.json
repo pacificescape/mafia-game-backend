@@ -14,6 +14,7 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "@types/koa-router": "^7.4.1",
     "@types/node": "^14.14.7",
     "dotenv": "^8.2.0",
@@ -35,6 +36,7 @@
     "@types/koa-graphql": "^0.8.4",
     "@types/koa-logger": "^3.1.1",
     "@types/koa-mount": "^4.0.0",
+    "@types/koa__cors": "^3.0.2",
     "@types/mongoose": "^5.7.37",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
@@ -42,5 +44,8 @@
     "eslint-config-prettier": "^6.15.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2"
+  },
+  "mdSeed": {
+    "seedersFolder": "./src/database/seeds/"
   }
 }
