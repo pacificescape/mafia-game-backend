@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
+import cors from '@koa/cors';
 
 // === controllers ===
 import appRouter from './controllers/app.controller';
@@ -26,6 +27,7 @@ const app = new Koa();
 
 app
   .use(logger())
+  .use(cors())
   .use(appRouter.routes())
   .use(appRouter.allowedMethods())
   .use(bodyParser())

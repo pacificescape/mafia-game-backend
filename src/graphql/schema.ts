@@ -1,11 +1,11 @@
 import { GraphQLString, GraphQLObjectType, GraphQLSchema } from 'graphql';
-import userGraphQLType from './user.schema';
+import userGraphQLType from './user.type';
 import User from '../models/user.model';
 
-const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+const UserQuery = new GraphQLObjectType({
+  name: 'UserQuery',
   fields: {
-    user: {
+    getUserById: {
       type: userGraphQLType,
       args: { id: { type: GraphQLString } },
       resolve(_, args) {
@@ -16,5 +16,5 @@ const RootQuery = new GraphQLObjectType({
 });
 
 export default new GraphQLSchema({
-  query: RootQuery,
+  query: UserQuery,
 });

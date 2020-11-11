@@ -3,10 +3,15 @@ import { config } from 'dotenv';
 
 config();
 
+const uri: string = process.env.CONNECTION_STRING || '';
+
 const initDB = () => {
-  mongoose.connect(process.env.CONNECTION_STRING || '', {
+  mongoose.connect(uri, {
+    bufferCommands: false,
+    bufferMaxEntries: 0,
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   });
 
   mongoose.connection.once('open', () => {
