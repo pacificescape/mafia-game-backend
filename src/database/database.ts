@@ -1,12 +1,14 @@
+import { getCollections } from './models/index'
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
+config()
+const collections = getCollections()
 
-config();
+console.log('collections', collections)
 
 const uri: string = process.env.CONNECTION_STRING || '';
 
-const initDB = () => {
-  mongoose.connect(uri, {
+const connection = mongoose.createConnection(uri, {
     bufferCommands: false,
     bufferMaxEntries: 0,
     useNewUrlParser: true,
@@ -14,9 +16,16 @@ const initDB = () => {
     useCreateIndex: true,
   });
 
-  mongoose.connection.once('open', () => {
-    console.log('Connected to database');
-  });
-};
+connection.once('open', () => {
+  console.log('Connected to database');
+});
 
-export default initDB;
+const db: { [key: string]: any } = {
+  connection
+}
+
+Object.keys(collections).forEach((collectionName: string) => {
+  db[collectionName] = connection.model(collectionName, collections[collectionName])
+})
+
+export default db

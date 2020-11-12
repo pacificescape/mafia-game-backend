@@ -15,17 +15,18 @@ import schema from './graphql/schema.js';
 import { config } from 'dotenv';
 
 // === utils ===
+import { addDb } from './middlewares/improveAppContext'
 import { getPort } from './shared/utils/process.util';
 
-// === db ===
-import initDB from './database/database';
+// === interfaces ===
+import { ICustomAppState, ICustomAppContext } from './shared/interfaces/customContext.interface'
 
 config();
-initDB();
 
-const app = new Koa();
+const app = new Koa<ICustomAppState, ICustomAppContext>();
 
 app
+  .use(addDb())
   .use(logger())
   .use(cors())
   .use(appRouter.routes())
