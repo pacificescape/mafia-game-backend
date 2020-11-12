@@ -8,7 +8,6 @@ appRouter.post('/register', async ctx => {
   const user = new ctx.db.User()
 
   user.password = 'asdf'
-
 });
 
 export default appRouter;

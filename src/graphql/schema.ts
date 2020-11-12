@@ -10,32 +10,29 @@ import UserType from './user.type';
 
 import jwt from 'jsonwebtoken'
 import { v4 as uuid } from 'uuid'
+import bcrypt from 'bcrypt'
 import LoginGraphQLType from './login.type';
+import { Context } from 'koa';
 
 const UserQuery = new GraphQLObjectType({
   name: 'UserQuery',
   fields: {
+    register: {
+      type: LoginGraphQLType,
+      args: {
+        login: { type: GraphQLString },
+        name: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve: register
+    },
     login: {
       type: LoginGraphQLType,
       args: {
         login: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve: async (_, { login, password }, ctx) => {
-        const user = await ctx.db.User.findOne({ login }) // { username }
-        let token, refreshToken, status = 200
-        if (user && user.password === password) {
-          refreshToken = uuid()
-          token = jwt.sign({ id: user.id }, (process.env.SECRET as string))
-        } else {
-          status = 401
-        }
-        return {
-          token,
-          refreshToken,
-          status
-        }
-      }
+      resolve: login
     },
     getUserById: {
       type: userGraphQLType,
@@ -65,3 +62,57 @@ const UserQuery = new GraphQLObjectType({
 export default new GraphQLSchema({
   query: UserQuery,
 });
+
+async function login(_: any, { login, password }: any, ctx: Context) {
+  const user = await ctx.db.User.findOne({ login }) // add { username }
+  let token, refreshToken, status = 200
+  if (user && await bcrypt.compare(password, user.password)) {
+    refreshToken = uuid(),
+    token = generateToken(login)
+  } else {
+    status = 401
+  }
+
+  return {
+    token,
+    refreshToken,
+    status
+  }
+}
+
+async function register(_: any, { login, name, password }: any, ctx: Context) {
+  let status = 200
+  try {
+    if (!await checkUsername(login, ctx)) {
+      status = 403
+      throw Error('Login is already used')
+    }
+
+    const user = new ctx.db.User()
+    user.name = name
+    user.login = login
+    user.password = await bcrypt.hash(password, 10)
+    await user.save()
+
+    return {
+      token: generateToken(login),
+      refreshToken: uuid(),
+      status
+    }
+  } catch (err) {
+    console.log(err)
+    return {
+      status
+    }
+  }
+}
+
+async function checkUsername(login: string, ctx: Context) {
+  const user = await ctx.db.User.findOne({ login })
+  if (user) return false
+  return true
+}
+
+function generateToken(login: string) {
+  jwt.sign({ id: login }, (process.env.SECRET as string), { expiresIn: '1d' })
+}

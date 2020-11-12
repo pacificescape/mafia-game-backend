@@ -2,6 +2,7 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 import cors from '@koa/cors';
+import jwtMiddleware from 'koa-jwt'
 
 // === controllers ===
 import appRouter from './controllers/app.controller';
@@ -29,9 +30,12 @@ app
   .use(addDb())
   .use(logger())
   .use(cors())
+  .use(bodyParser())
   .use(appRouter.routes())
   .use(appRouter.allowedMethods())
-  .use(bodyParser())
+  .use(jwtMiddleware({
+    secret: process.env.SECRET as string
+  }))
   .use(
     mount(
       '/graphql',
