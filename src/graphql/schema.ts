@@ -17,9 +17,10 @@ const UserQuery = new GraphQLObjectType({
   fields: {
     login: {
       type: LoginGraphQLType,
-      args: { login: { type: GraphQLString },
-              password: { type: GraphQLString }
-            },
+      args: {
+        login: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
       resolve: async (_, { login, password }, ctx) => {
         const user = await ctx.db.User.findOne({ login }) // { username }
         let token, refreshToken, status = 200
@@ -39,24 +40,22 @@ const UserQuery = new GraphQLObjectType({
     getUserById: {
       type: userGraphQLType,
       args: { id: { type: GraphQLString } },
-      resolve(_, args) {
-        return db.User.findById(args.id);
+      resolve(_, args, ctx) {
+        return ctx.db.User.findById(args.id);
       },
     },
     getUserByName: {
       type: userGraphQLType,
       args: { name: { type: GraphQLString } },
-      resolve(_, args) {
-        return db.User.findOne({ name: args.name });
+      resolve(_, args, ctx) {
+        return ctx.db.User.findOne({ name: args.name });
       },
     },
     getUsers: {
       type: new GraphQLList(UserType),
       args: { limit: { type: GraphQLInt } },
-      async resolve(_, { limit }, ctx, four) {
-        // console.log(ctx)
-        // console.log(four)
-        const user = db.User.find({}).limit(limit);
+      async resolve(_, { limit }, ctx) {
+        const user = ctx.db.User.find({}).limit(limit);
         return user
       },
     },
