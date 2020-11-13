@@ -35,7 +35,7 @@ app
     mount(
       '/graphql',
       graphqlHTTP({
-        schema: schema,
+        schema,
         graphiql: true,
       }),
     ),
