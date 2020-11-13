@@ -10,9 +10,12 @@ import User from '../models/user.model';
 import UserType from './user.type';
 
 const UserQuery = new GraphQLObjectType({
+  description: 'A type that describes the User.',
   name: 'UserQuery',
   fields: {
     getUserById: {
+      description:
+        'Returns a User where the argument `id` is equal to `User.id` in database.',
       type: userGraphQLType,
       args: { id: { type: GraphQLString } },
       resolve(_, args) {
@@ -20,6 +23,8 @@ const UserQuery = new GraphQLObjectType({
       },
     },
     getUserByName: {
+      description:
+        'Returns a User where the argument `name` is equal to `User.name` in database.',
       type: userGraphQLType,
       args: { name: { type: GraphQLString } },
       resolve(_, args) {
@@ -27,6 +32,8 @@ const UserQuery = new GraphQLObjectType({
       },
     },
     getUsers: {
+      description:
+        'Returns a list of users. Use the `limit` argument to get only first `N` users.',
       type: new GraphQLList(UserType),
       args: { limit: { type: GraphQLInt } },
       resolve(_, { limit }) {
