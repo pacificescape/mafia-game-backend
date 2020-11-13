@@ -23,7 +23,7 @@ import initDB from './database/database';
 config();
 initDB();
 
-const app = new Koa();
+const app: Koa = new Koa();
 
 app
   .use(logger())

@@ -5,7 +5,7 @@ config();
 
 const uri: string = process.env.CONNECTION_STRING || '';
 
-const initDB = async () => {
+const initDB = async (): Promise<void> => {
   await mongoose.connect(uri, {
     bufferCommands: false,
     bufferMaxEntries: 0,

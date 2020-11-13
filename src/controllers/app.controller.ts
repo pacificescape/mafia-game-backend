@@ -1,8 +1,9 @@
 import Router from 'koa-router';
+import { Context } from 'vm';
 
-const appRouter = new Router({ prefix: '/api' });
+const appRouter: Router = new Router({ prefix: '/api' });
 
-appRouter.get('/', ctx => {
+appRouter.get('/', (ctx: Context) => {
   ctx.body = 'Swagger here';
 });
 
