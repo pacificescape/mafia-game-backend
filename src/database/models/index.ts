@@ -1,4 +1,4 @@
-import { UserSchema } from './user.model';
+import UserSchema from './user.model';
 import RefreshToken from './refresh.model';
 
 const collections = {

@@ -71,7 +71,6 @@ async function createApp() {
   return { server: app, db };
 }
 
-console.log('module.parent:', !!module.parent);
 if (require.main === module) {
   createApp().then(({ server }) => {
     server.listen(getPort()).on('listening', () => {

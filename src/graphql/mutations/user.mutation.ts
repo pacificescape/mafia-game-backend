@@ -1,5 +1,4 @@
 import { GraphQLBoolean, GraphQLObjectType, GraphQLString } from 'graphql';
-import User from '../../models/user.model';
 import UserType from '../types/user.type';
 
 const UserMutation = new GraphQLObjectType({
@@ -18,8 +17,8 @@ const UserMutation = new GraphQLObjectType({
         isAdmin: { type: GraphQLBoolean },
         isLogged: { type: GraphQLBoolean },
       },
-      resolve(_, args) {
-        return new User(args).save();
+      resolve(_, args, ctx) {
+        return new ctx.db.User(args).save();
       },
     },
     deleteUserById: {
@@ -29,8 +28,8 @@ const UserMutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLString },
       },
-      resolve(_, { id }) {
-        return User.findByIdAndRemove(id);
+      resolve(_, { id }, ctx) {
+        return ctx.db.User.findByIdAndRemove(id);
       },
     },
     updateUserById: {
@@ -46,8 +45,8 @@ const UserMutation = new GraphQLObjectType({
         isAdmin: { type: GraphQLBoolean },
         isLogged: { type: GraphQLBoolean },
       },
-      resolve(_, { id, ...args }) {
-        return User.findByIdAndUpdate(id, { ...args });
+      resolve(_, { id, ...args }, ctx) {
+        return ctx.db.User.findByIdAndUpdate(id, { ...args });
       },
     },
   },

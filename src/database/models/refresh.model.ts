@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, SchemaTypes } from 'mongoose';
 
 /*
   notice there is no ID. That's because Mongoose will assign
@@ -7,10 +7,12 @@ import mongoose, { Schema } from 'mongoose';
 
 const RefreshToken: Schema = new Schema({
   user: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: SchemaTypes.ObjectId,
     ref: 'User',
   },
   token: String,
+}, {
+  timestamps: true
 });
 
 export default RefreshToken;
