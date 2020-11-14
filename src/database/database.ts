@@ -1,22 +1,29 @@
+import { getCollections } from './models/index';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
-
 config();
 
+const collections = getCollections();
 const uri: string = process.env.CONNECTION_STRING || '';
 
-const initDB = async (): Promise<void> => {
-  await mongoose.connect(uri, {
-    bufferCommands: false,
-    bufferMaxEntries: 0,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  });
+const connection = mongoose.createConnection(uri, {
+  bufferCommands: false,
+  bufferMaxEntries: 0,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
-  mongoose.connection.once('open', () => {
-    console.log('Connected to database');
-  });
+const db: { [key: string]: any } = {
+  connection,
 };
 
-export default initDB;
+Object.keys(collections).forEach((collectionName: string) => {
+  db[collectionName] = connection.model(
+    collectionName,
+    collections[collectionName],
+  );
+});
+
+export default db;
