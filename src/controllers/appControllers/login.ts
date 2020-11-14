@@ -4,10 +4,8 @@ import { Context } from 'koa';
 import issueTokenPair from '../../service/auth/issueTokenPair';
 
 async function login(ctx: Context) {
-  const { name, login, password } = ctx.request.body;
-  const user = await ctx.db.User.findOne({
-    [name ? 'name' : 'login']: [name || login],
-  });
+  const { login, password } = ctx.request.body;
+  const user = await ctx.db.User.findOne({ login });
   let newPair;
 
   if (user && (await bcrypt.compare(password, user.password))) {
