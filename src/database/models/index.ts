@@ -1,9 +1,11 @@
-import { UserSchema } from './user.model'
+import { UserSchema } from './user.model';
+import RefreshToken from './refresh.model';
 
 const collections = {
-  User: UserSchema
-} as any
+  User: UserSchema,
+  RefreshToken,
+} as any;
 
-const getCollections = () => collections
+const getCollections = () => collections;
 
-export { getCollections }
+export { getCollections };

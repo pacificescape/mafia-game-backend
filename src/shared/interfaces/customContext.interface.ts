@@ -1,4 +1,4 @@
-export type ICustomAppContext = {
+export interface ICustomAppContext {
   db: any;
 }
 
