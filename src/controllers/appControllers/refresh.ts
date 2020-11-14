@@ -1,22 +1,23 @@
-import bcrypt from 'bcrypt';
-
-import generateToken from '../../service/auth/generateToken';
-import generateRefToken from '../../service/auth/generateRefToken';
-
 import { Context } from 'koa';
 import issueTokenPair from '../../service/auth/issueTokenPair';
 
 async function refresh(ctx: Context) {
   const { refreshToken } = ctx.request.body;
-  const deleted = await ctx.db.RefreshToken.findOneAndRemove({
-    token: refreshToken,
-  });
-  if (deleted?.deletedCount === 1) {
-    ctx.status = 500;
-  }
+  try {
+    const deleted = await ctx.db.RefreshToken.findOneAndRemove({
+      token: refreshToken,
+    });
+    if (!deleted) {
+      ctx.status = 403;
+      return;
+    }
 
-  const newPair = await issueTokenPair(deleted.user.id);
-  ctx.body = newPair;
+    const newPair = await issueTokenPair(deleted.user.id);
+    ctx.body = newPair;
+  } catch (err) {
+    console.log(err)
+    ctx.status = 500
+  }
 }
 
 export default refresh;

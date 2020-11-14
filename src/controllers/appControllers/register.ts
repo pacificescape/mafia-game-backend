@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
 
-import checkUsername from '../../service/auth/checkUsername';
-import generateToken from '../../service/auth/generateToken';
-import generateRefToken from '../../service/auth/generateRefToken';
+import checkLogin from '../../service/auth/checkLogin';
+import issueTokenPair from '../../service/auth/issueTokenPair'
 
 import { Context } from 'koa';
 
@@ -12,7 +11,7 @@ import { Context } from 'koa';
 const register = async (ctx: Context) => {
   try {
     const { login, password, name } = ctx.request.body;
-    if (!(await checkUsername(login, ctx))) {
+    if (!(await checkLogin(login, ctx))) {
       throw Error('Login is already used');
     }
 
@@ -22,10 +21,7 @@ const register = async (ctx: Context) => {
     user.password = await bcrypt.hash(password, 10);
     await user.save();
 
-    ctx.body = {
-      token: generateToken(login),
-      refreshToken: generateRefToken(),
-    };
+    ctx.body = await issueTokenPair(user.id);
   } catch (err) {
     console.log(err);
     ctx.status = 500;
