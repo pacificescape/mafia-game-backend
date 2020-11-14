@@ -36,13 +36,11 @@ test('User receives 403 on invalid credentials', async t => {
 });
 
 test('User can register', async t => {
-  const res = await request(app)
-    .post('/api/register')
-    .send({
-      login: regLogin,
-      password: 'TEST_PASSWORD',
-      name: 'TEST_REGISTRATION_USER',
-    });
+  const res = await request(app).post('/api/register').send({
+    login: regLogin,
+    password: 'TEST_PASSWORD',
+    name: 'TEST_REGISTRATION_USER',
+  });
 
   t.is(res.type, 'application/json');
   t.is(res.status, 200);

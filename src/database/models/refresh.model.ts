@@ -5,14 +5,17 @@ import { Schema, SchemaTypes } from 'mongoose';
   an ID by default to all schemas
 */
 
-const RefreshToken: Schema = new Schema({
-  user: {
-    type: SchemaTypes.ObjectId,
-    ref: 'User',
+const RefreshToken: Schema = new Schema(
+  {
+    user: {
+      type: SchemaTypes.ObjectId,
+      ref: 'User',
+    },
+    token: String,
   },
-  token: String,
-}, {
-  timestamps: true
-});
+  {
+    timestamps: true,
+  },
+);
 
 export default RefreshToken;
