@@ -1,6 +1,6 @@
 import { GraphQLBoolean, GraphQLObjectType, GraphQLString } from 'graphql';
 
-const UserType = new GraphQLObjectType({
+const UserType: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     id: { type: GraphQLString },

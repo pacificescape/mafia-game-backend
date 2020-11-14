@@ -4,16 +4,26 @@ Backend for [Mafia-Game](https://github.com/ReSenpai/mafia-game)
 
 ## Installation
 ```
-$ yarn install
+$ yarn
 ```
 
 ## Running the app
 ```
-# development
+# start build
 $ yarn start
 
 # watch mode
 $ yarn start:dev
+
+# build
+$ yarn build
+
+# format using Prettier
+$ yarn format
+
+
+# lint using ESLint
+$ yarn lint
 ```
 
 ## Tech Stack:
@@ -28,7 +38,7 @@ $ yarn start:dev
 
 ### Query example
 
-```
+```js
 {
   user(id: "USER_ID") {
     name
@@ -38,7 +48,7 @@ $ yarn start:dev
 
 Result:
 
-```
+```json
 {
   "data": {
     "user": {

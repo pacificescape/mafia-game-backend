@@ -7,7 +7,7 @@
   "private": false,
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "yarn prebuild & tsc",
+    "build": "tsc",
     "start": "node ./dist/index.js",
     "start:dev": "tsc -w & nodemon ./dist/index.js",
     "format": "prettier --write \"src/**/*.ts\"",

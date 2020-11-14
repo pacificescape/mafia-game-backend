@@ -1,47 +1,14 @@
-import {
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLSchema,
-  GraphQLList,
-  GraphQLInt,
-} from 'graphql';
-import userGraphQLType from './user.type';
-import UserType from './user.type';
+import { GraphQLSchema } from 'graphql';
 
-const UserQuery = new GraphQLObjectType({
-  name: 'UserQuery',
-  fields: {
-    getUserById: {
-      type: userGraphQLType,
-      args: { id: { type: GraphQLString } },
-      resolve(_, args, ctx) {
-        return ctx.db.User.findById(args.id);
-      },
-    },
-    getUserByName: {
-      type: userGraphQLType,
-      args: { name: { type: GraphQLString } },
-      resolve(_, args, ctx) {
-        return ctx.db.User.findOne({ name: args.name });
-      },
-    },
-    getUsers: {
-      type: new GraphQLList(UserType),
-      args: { limit: { type: GraphQLInt } },
-      async resolve(_, { limit }, ctx) {
-        const user = ctx.db.User.find({}).limit(limit);
-        return user;
-      },
-    },
-  },
-});
+// === mutations ===
+import UserMutation from './mutations/user.mutation';
 
-// const UserMutation = new GraphQLObjectType({
-//   name: 'UserMutation',
-//   fields: {},
-// });
+// === queries ===
+import UserQuery from './queries/user.query';
 
-export default new GraphQLSchema({
+const schema: GraphQLSchema = new GraphQLSchema({
   query: UserQuery,
-  // mutation: UserMutation,
+  mutation: UserMutation,
 });
+
+export default schema;
