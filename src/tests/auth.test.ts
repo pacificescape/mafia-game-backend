@@ -23,7 +23,7 @@ test('User can login', async t => {
   t.is(res.type, 'application/json');
   t.is(res.status, 200);
 
-  await mongo.RefreshToken.deleteOne({ token: res.body.refreshToken })
+  await mongo.RefreshToken.deleteOne({ token: res.body.refreshToken });
 });
 
 test('User receives 403 on invalid credentials', async t => {
@@ -78,15 +78,13 @@ test('User receives 401 on expired token', async t => {
 test('User refresh token', async t => {
   const user = await mongo.User.findOne({ name: 'TEST_USER' });
   const { refreshToken } = await issueTokenPair(user.id);
-  const res = await request(app)
-    .post('/api/refresh')
-    .send({ refreshToken });
+  const res = await request(app).post('/api/refresh').send({ refreshToken });
 
   t.is(res.status, 200);
   t.truthy(typeof res.body.token === 'string');
   t.truthy(typeof res.body.refreshToken === 'string');
 
-  await mongo.RefreshToken.deleteOne({ token: refreshToken })
+  await mongo.RefreshToken.deleteOne({ token: refreshToken });
 });
 
 test('User logout', async t => {
@@ -98,25 +96,21 @@ test('User logout', async t => {
 
   t.is(res.status, 200);
 
-  await mongo.RefreshToken.deleteOne({ token: refreshToken })
+  await mongo.RefreshToken.deleteOne({ token: refreshToken });
 });
 
 test('User can use refresh token only once', async t => {
   const user = await mongo.User.findOne({ name: 'TEST_USER' });
   const { refreshToken } = await issueTokenPair(user.id);
-  const res = await request(app)
-    .post('/api/refresh')
-    .send({ refreshToken });
+  const res = await request(app).post('/api/refresh').send({ refreshToken });
 
   t.is(res.status, 200);
   t.truthy(typeof res.body.token === 'string');
   t.truthy(typeof res.body.refreshToken === 'string');
 
-  const res2 = await request(app)
-    .post('/api/refresh')
-    .send({ refreshToken });
+  const res2 = await request(app).post('/api/refresh').send({ refreshToken });
 
   t.is(res2.status, 403);
 
-  await mongo.RefreshToken.deleteOne({ token: refreshToken })
+  await mongo.RefreshToken.deleteOne({ token: refreshToken });
 });

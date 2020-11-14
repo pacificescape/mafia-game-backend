@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 
 import checkLogin from '../../service/auth/checkLogin';
-import issueTokenPair from '../../service/auth/issueTokenPair'
+import issueTokenPair from '../../service/auth/issueTokenPair';
 
 import { Context } from 'koa';
 

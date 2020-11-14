@@ -15,8 +15,8 @@ async function refresh(ctx: Context) {
     const newPair = await issueTokenPair(deleted.user.id);
     ctx.body = newPair;
   } catch (err) {
-    console.log(err)
-    ctx.status = 500
+    console.log(err);
+    ctx.status = 500;
   }
 }
 

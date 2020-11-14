@@ -19,7 +19,7 @@ appRouter.post('/login', login);
 
 appRouter.post('/refresh', refresh);
 
-appRouter.use(jwtMiddleware({ secret: process.env.SECRET as string }))
+appRouter.use(jwtMiddleware({ secret: process.env.SECRET as string }));
 
 appRouter.post('/logout', logout);
 
