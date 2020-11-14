@@ -45,13 +45,6 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
         return User.find({}).estimatedDocumentCount();
       },
     },
-    addUser: {
-      description: 'Creates and adds new user.',
-      type: GraphQLInt,
-      resolve() {
-        return User.find({}).estimatedDocumentCount();
-      },
-    },
   },
 });
 
