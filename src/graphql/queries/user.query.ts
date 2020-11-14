@@ -12,8 +12,7 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
   name: 'UserQuery',
   fields: {
     getUserById: {
-      description:
-        'Returns a `User` where the argument `id` is equal to `User.id` in database.',
+      description: 'Returns a `User` where `User.id = id` in database.',
       type: UserType,
       args: { id: { type: GraphQLString } },
       resolve(_, { id }) {
@@ -21,8 +20,7 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
       },
     },
     getUserByName: {
-      description:
-        'Returns a `User` where the argument `name` is equal to `User.name` in database.',
+      description: 'Returns a `User` where `User.name = name` in database.',
       type: UserType,
       args: { name: { type: GraphQLString } },
       resolve(_, { name }) {
