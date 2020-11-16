@@ -1,7 +1,5 @@
 import { v4 as uuid } from 'uuid';
 
-function generateRefToken() {
-  return uuid();
-}
+const generateRefToken = (): string => uuid();
 
 export default generateRefToken;

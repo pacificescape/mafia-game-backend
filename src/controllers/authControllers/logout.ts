@@ -1,6 +1,6 @@
 import { Context } from 'koa';
 
-async function logout(ctx: Context) {
+async function logout(ctx: Context): Promise<void> {
   const { id } = ctx.state.user;
   try {
     const user = await ctx.db.User.findOne({ _id: id });

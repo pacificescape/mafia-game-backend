@@ -13,14 +13,11 @@ const appRouter = new Router<DefaultState, ICustomAppContext>({
   prefix: '/auth',
 });
 
-appRouter.post('/register', register);
-
-appRouter.post('/login', login);
-
-appRouter.post('/refresh', refresh);
-
-appRouter.use(jwtMiddleware({ secret: process.env.SECRET as string }));
-
-appRouter.post('/logout', logout);
+appRouter
+  .post('/register', register)
+  .post('/login', login)
+  .post('/refresh', refresh)
+  .use(jwtMiddleware({ secret: process.env.SECRET as string }))
+  .post('/logout', logout);
 
 export default appRouter;

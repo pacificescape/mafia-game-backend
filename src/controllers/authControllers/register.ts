@@ -8,7 +8,7 @@ import { Context } from 'koa';
 // fixed ts context error
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/36161#issuecomment-571295417
 
-const register = async (ctx: Context) => {
+const register = async (ctx: Context): Promise<void> => {
   try {
     const { login, password, name } = ctx.request.body;
     if (!(await checkLogin(login, ctx))) {

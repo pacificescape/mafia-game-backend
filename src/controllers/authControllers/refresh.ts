@@ -1,7 +1,7 @@
 import { Context } from 'koa';
 import issueTokenPair from '../../service/auth/issueTokenPair';
 
-async function refresh(ctx: Context) {
+async function refresh(ctx: Context): Promise<void> {
   const { refreshToken } = ctx.request.body;
   try {
     const deleted = await ctx.db.RefreshToken.findOneAndRemove({

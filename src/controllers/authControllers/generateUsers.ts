@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 import { Context } from 'koa';
 
-async function generateUsers(ctx: Context) {
+async function generateUsers(ctx: Context): Promise<void> {
   const users = await ctx.db.User.find().cursor();
 
   for await (const user of users) {

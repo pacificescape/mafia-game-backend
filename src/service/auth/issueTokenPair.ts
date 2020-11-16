@@ -2,8 +2,13 @@ import { v4 as uuid } from 'uuid';
 import jwt from 'jsonwebtoken';
 import db from '../../database/database';
 
-async function issueTokenPair(id: string) {
-  const refreshToken = uuid();
+async function issueTokenPair(
+  id: string,
+): Promise<{
+  token: string;
+  refreshToken: string;
+}> {
+  const refreshToken: string = uuid();
   await db
     .RefreshToken({
       token: refreshToken,

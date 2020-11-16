@@ -3,7 +3,7 @@ import { Context } from 'koa';
 
 import issueTokenPair from '../../service/auth/issueTokenPair';
 
-async function login(ctx: Context) {
+async function login(ctx: Context): Promise<void> {
   const { login, password } = ctx.request.body;
   if (!login || !password) return
   const user = await ctx.db.User.findOne({ login });
