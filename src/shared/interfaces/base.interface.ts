@@ -1,3 +1,3 @@
 export interface IBase {
-  readonly id: number | string;
+  readonly id: string;
 }
