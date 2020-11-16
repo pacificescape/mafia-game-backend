@@ -25,9 +25,21 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
   },
 });
 
+const RootMutation = new GraphQLObjectType({
+  name: 'RootMutation',
+  fields: {
+    user: {
+      type: UserMutation,
+      resolve() {
+        return UserMutation;
+      },
+    },
+  },
+});
+
 const schema: GraphQLSchema = new GraphQLSchema({
   query: RootQuery,
-  mutation: UserMutation,
+  mutation: RootMutation,
 });
 
 export default schema;
