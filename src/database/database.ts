@@ -1,6 +1,7 @@
 import { getCollections } from '../models/index';
 import { Connection, createConnection } from 'mongoose';
 import { config } from 'dotenv';
+import { IDb } from 'src/shared/interfaces/db.interface';
 config();
 
 const collections = getCollections();
@@ -15,7 +16,7 @@ const connection: Connection = createConnection(uri, {
   useFindAndModify: false,
 });
 
-const db: { [key: string]: any } = {
+const db: IDb = {
   connection,
 };
 
