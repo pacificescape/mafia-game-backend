@@ -6,5 +6,5 @@ export class Civilian extends Character implements ICivilian {
     super(_id);
   }
 
-  isPeaceful: true = true;
+  public isPeaceful: true = true;
 }

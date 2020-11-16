@@ -6,6 +6,6 @@ export class Doctor extends Character implements IDoctor {
     super(_id);
   }
 
-  isPeaceful: true = true;
-  hasAid: boolean = false;
+  public isPeaceful: true = true;
+  public hasAid: boolean = false;
 }

@@ -6,6 +6,6 @@ export class Sheriff extends Character implements ISheriff {
     super(_id);
   }
 
-  isPeaceful: false = false;
-  killsCount: number = 0;
+  public isPeaceful: false = false;
+  public killsCount: number = 0;
 }

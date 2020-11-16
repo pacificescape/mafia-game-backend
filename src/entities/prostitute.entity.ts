@@ -6,6 +6,6 @@ export class Prostitute extends Character implements IProstitute {
     super(_id);
   }
 
-  isPeaceful: false = false;
-  killsCount: number = 0;
+  public isPeaceful: false = false;
+  public killsCount: number = 0;
 }

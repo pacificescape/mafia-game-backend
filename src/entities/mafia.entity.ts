@@ -6,6 +6,6 @@ export class Mafia extends Character implements IMafia {
     super(_id);
   }
 
-  killsCount: number = 0;
-  isPeaceful: false = false;
+  public killsCount: number = 0;
+  public isPeaceful: false = false;
 }

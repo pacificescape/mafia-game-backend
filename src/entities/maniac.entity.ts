@@ -6,6 +6,6 @@ export class Maniac extends Character implements IManiac {
     super(_id);
   }
 
-  isPeaceful: false = false;
-  killsCount: number = 0;
+  public isPeaceful: false = false;
+  public killsCount: number = 0;
 }
