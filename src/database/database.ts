@@ -1,12 +1,12 @@
 import { getCollections } from '../models/index';
-import mongoose from 'mongoose';
+import { Connection, createConnection } from 'mongoose';
 import { config } from 'dotenv';
 config();
 
 const collections = getCollections();
 const uri: string = process.env.CONNECTION_STRING || '';
 
-const connection = mongoose.createConnection(uri, {
+const connection: Connection = createConnection(uri, {
   bufferCommands: false,
   bufferMaxEntries: 0,
   useNewUrlParser: true,
