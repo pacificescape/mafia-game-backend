@@ -1,5 +1,7 @@
+import { IDb } from './db.interface';
+
 export interface ICustomAppContext {
-  db: any;
+  db: IDb;
 }
 
 export interface ICustomAppState {

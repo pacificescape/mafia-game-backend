@@ -43,7 +43,7 @@ const apollo = new ApolloServer({
   schema,
   context: async ({ ctx }) => {
     return {
-      user: await getUser(ctx?.state?.user?.id),
+      user: await getUser(ctx.state?.user?.id),
       koa: ctx,
     };
   },
