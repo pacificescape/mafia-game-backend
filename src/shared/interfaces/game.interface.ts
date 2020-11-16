@@ -3,6 +3,6 @@ import { IMessage } from './message.interface';
 import { IUser } from './user.interface';
 
 export interface IGame extends IBase {
-  users: IUser[];
-  messages: IMessage[];
+  readonly users: IUser[];
+  readonly messages: IMessage[];
 }

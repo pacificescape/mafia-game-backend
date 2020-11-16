@@ -1,11 +1,11 @@
 import { IBase } from './base.interface';
 
 export interface IUser extends IBase {
-  name: string;
-  login: string;
-  password: string;
-  updatedAt: string;
-  createdAt: string;
-  isAdmin: boolean;
-  isLogged: boolean;
+  readonly name: string;
+  readonly login: string;
+  readonly password: string;
+  readonly updatedAt: string;
+  readonly createdAt: string;
+  readonly isAdmin: boolean;
+  readonly isLogged: boolean;
 }
