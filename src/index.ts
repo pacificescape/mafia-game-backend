@@ -5,12 +5,14 @@ import cors from '@koa/cors';
 import jwtMiddleware from 'koa-jwt';
 
 // === controllers ===
-import appRouter from './controllers/app.controller';
+import authRouter from './controllers/auth.controller';
+
+// === services ===
+import getUser from './service/auth/getUser'
 
 // === graphql ===
-import mount from 'koa-mount';
-import graphqlHTTP from 'koa-graphql';
-import schema from './graphql/schema.js';
+import { ApolloServer } from 'apollo-server-koa';
+import schema from './graphql/schema'
 
 // === env ===
 import { config } from 'dotenv';
@@ -37,8 +39,20 @@ const initDb = () =>
     db.error;
   });
 
+const apollo = new ApolloServer({
+  schema,
+  context: async ({ ctx }) => {
+    return {
+      user: await getUser(ctx?.state?.user?.id),
+      koa: ctx
+    }
+  },
+  debug: true // dev ? true : false
+})
+
 async function createApp() {
   const app = new Koa<ICustomAppState, ICustomAppContext>();
+
   await initDb();
 
   app
@@ -49,25 +63,15 @@ async function createApp() {
     .use(logger())
     .use(cors())
     .use(bodyParser())
-    .use(appRouter.routes())
-    .use(appRouter.allowedMethods())
+    .use(authRouter.routes())
+    .use(authRouter.allowedMethods())
     .use(
       jwtMiddleware({
         secret: process.env.SECRET as string,
+        passthrough: true
       }),
     )
-    .use(
-      mount(
-        '/graphql',
-        graphqlHTTP({
-          schema: schema,
-          graphiql: true,
-          // context: (ctx: Context) => {
-          //   return ctx;
-          // },
-        }),
-      ),
-    );
+    .use(apollo.getMiddleware())
   return { server: app, db };
 }
 
@@ -75,7 +79,7 @@ if (require.main === module) {
   createApp().then(({ server }) => {
     server.listen(getPort()).on('listening', () => {
       console.log(`Listening on: http://localhost:${getPort()}/api/`);
-      console.log(`GraphQL on: http://localhost:${getPort()}/graphql/`);
+      console.log(`GraphQL on: http://localhost:${getPort()}${apollo.graphqlPath}`);
     });
   });
 }

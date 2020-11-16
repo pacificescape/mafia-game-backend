@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLObjectType, GraphQLString } from 'graphql';
-import UserType from '../types/user.type';
+import { UserType } from '../types/user.type';
 
 const UserMutation = new GraphQLObjectType({
   description: 'Mutation to interact with `Users` collection.',

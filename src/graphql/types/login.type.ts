@@ -1,7 +1,6 @@
 import {
   GraphQLInt,
   GraphQLObjectType,
-  GraphQLScalarType,
   GraphQLString,
 } from 'graphql';
 
