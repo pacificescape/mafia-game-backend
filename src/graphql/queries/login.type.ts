@@ -1,9 +1,4 @@
-import {
-  GraphQLInt,
-  GraphQLObjectType,
-  GraphQLScalarType,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLInt, GraphQLObjectType, GraphQLString } from 'graphql';
 
 const LoginType = new GraphQLObjectType({
   name: 'Login',

@@ -29,7 +29,7 @@ import db from './database/database';
 config();
 
 const initDb = () =>
-  new Promise(resolve => {
+  new Promise<void>(resolve => {
     db.connection.once('open', () => {
       console.log('Connected to MongoDB');
       resolve();

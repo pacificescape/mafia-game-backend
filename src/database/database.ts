@@ -1,4 +1,4 @@
-import { getCollections } from './models/index';
+import { getCollections } from '../models/index';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
 config();
