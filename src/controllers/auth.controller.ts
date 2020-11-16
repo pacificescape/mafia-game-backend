@@ -2,15 +2,15 @@ import { DefaultState } from 'koa';
 import Router from 'koa-router';
 import jwtMiddleware from 'koa-jwt';
 import { ICustomAppContext } from '../shared/interfaces/customContext.interface';
-import register from './appControllers/register';
-import login from './appControllers/login';
-import refresh from './appControllers/refresh';
-import logout from './appControllers/logout';
+import register from './authControllers/register';
+import login from './authControllers/login';
+import refresh from './authControllers/refresh';
+import logout from './authControllers/logout';
 
 // import generateUsers from './appControllers/generateUsers';
 
 const appRouter = new Router<DefaultState, ICustomAppContext>({
-  prefix: '/api',
+  prefix: '/auth',
 });
 
 appRouter

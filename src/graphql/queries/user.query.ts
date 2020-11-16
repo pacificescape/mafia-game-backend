@@ -4,18 +4,27 @@ import {
   GraphQLList,
   GraphQLInt,
 } from 'graphql';
-import UserType from '../types/user.type';
+import { UserType } from '../types/user.type';
+import { AuthenticationError } from 'apollo-server-koa'
 
 const UserQuery: GraphQLObjectType = new GraphQLObjectType({
   description: 'Query to interact with `Users` collection',
   name: 'UserQuery',
   fields: {
+    getMe: {
+      description: 'Returns a current `User`',
+      type: UserType,
+      resolve(_, __, ctx) {
+        if (!ctx.user) throw new AuthenticationError('Athentification error')
+        return ctx.user
+      }
+    },
     getUserById: {
       description: 'Returns a `User` where `User.id = id` in database.',
       type: UserType,
       args: { id: { type: GraphQLString } },
       resolve(_, { id }, ctx) {
-        return ctx.db.User.findById(id);
+        return ctx.koa.db.User.findById(id);
       },
     },
     getUserByName: {
@@ -23,7 +32,7 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
       type: UserType,
       args: { name: { type: GraphQLString } },
       resolve(_, { name }, ctx) {
-        return ctx.db.User.findOne({ name });
+        return ctx.koa.db.User.findOne({ name });
       },
     },
     getUsers: {
@@ -32,14 +41,14 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       args: { limit: { type: GraphQLInt } },
       resolve(_, { limit }, ctx) {
-        return ctx.db.User.find({}).limit(limit);
+        return ctx.koa.db.User.find({}).limit(limit);
       },
     },
     countUsers: {
       description: 'Return the count of `User` documents.',
       type: GraphQLInt,
       resolve(_, __, ctx) {
-        return ctx.db.User.find({}).estimatedDocumentCount();
+        return ctx.koa.db.User.find({}).estimatedDocumentCount();
       },
     },
   },
