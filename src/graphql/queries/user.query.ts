@@ -5,7 +5,7 @@ import {
   GraphQLInt,
 } from 'graphql';
 import { UserType } from '../types/user.type';
-import { AuthenticationError } from 'apollo-server-koa'
+import { AuthenticationError } from 'apollo-server-koa';
 
 const UserQuery: GraphQLObjectType = new GraphQLObjectType({
   description: 'Query to interact with `Users` collection',
@@ -15,9 +15,9 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
       description: 'Returns a current `User`',
       type: UserType,
       resolve(_, __, ctx) {
-        if (!ctx.user) throw new AuthenticationError('Athentification error')
-        return ctx.user
-      }
+        if (!ctx.user) throw new AuthenticationError('Athentification error');
+        return ctx.user;
+      },
     },
     getUserById: {
       description: 'Returns a `User` where `User.id = id` in database.',

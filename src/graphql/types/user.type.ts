@@ -16,7 +16,5 @@ export const UserType: GraphQLObjectType = new GraphQLObjectType({
 
 export const PlayerType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Player',
-  fields: () => ({
-
-  })
-})
+  fields: () => ({}),
+});

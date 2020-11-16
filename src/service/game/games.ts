@@ -5,20 +5,20 @@ interface LobbyInterface {
 class Lobby implements LobbyInterface {
   constructor(games: Array<any>) {
     games.forEach((game: any) => {
-      this.games.set(game.id, game)
+      this.games.set(game.id, game);
     });
   }
 
   games: Map<string, unknown> = new Map();
 
   get() {
-    return this.games
+    return this.games;
   }
 }
 
 const lobby = new Lobby([
   { id: 1, name: 'First game', players: [] },
-  { id: 2, name: 'Second game', players: [] }
-])
+  { id: 2, name: 'Second game', players: [] },
+]);
 
-export default lobby
+export default lobby;

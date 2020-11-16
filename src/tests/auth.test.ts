@@ -88,7 +88,6 @@ test('User can use refresh token only once', async t => {
   await mongo.RefreshToken.deleteOne({ token: refreshToken });
 });
 
-
 // GraphQL auth tests
 
 test('User receives data on query (user { getMe })', async t => {
@@ -115,7 +114,7 @@ test('User receives 401 on expired token', async t => {
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${token}`);
 
-  t.is(res.body.errors[0].extensions.code, 'UNAUTHENTICATED')
-  t.is(res.body.data.user.getMe, null)
+  t.is(res.body.errors[0].extensions.code, 'UNAUTHENTICATED');
+  t.is(res.body.data.user.getMe, null);
   t.is(res.status, 200);
 });

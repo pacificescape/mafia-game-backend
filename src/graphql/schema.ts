@@ -19,11 +19,11 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
     lobby: {
       type: LobbyQuery,
       resolve() {
-        return LobbyQuery
-      }
-    }
+        return LobbyQuery;
+      },
+    },
   },
-})
+});
 
 const schema: GraphQLSchema = new GraphQLSchema({
   query: RootQuery,

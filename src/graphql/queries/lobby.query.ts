@@ -1,11 +1,6 @@
-import {
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLList,
-  GraphQLInt,
-} from 'graphql';
+import { GraphQLString, GraphQLObjectType } from 'graphql';
 import { UserType } from '../types/user.type';
-import lobbyService from '../../service/game/games'
+import lobbyService from '../../service/game/games';
 
 const LobbyQuery: GraphQLObjectType = new GraphQLObjectType({
   description: 'Query to interact with `Games` collection',
@@ -16,7 +11,7 @@ const LobbyQuery: GraphQLObjectType = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: GraphQLString } },
       resolve() {
-        return lobbyService.get()
+        return lobbyService.get();
       },
     },
   },

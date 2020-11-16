@@ -8,11 +8,11 @@ import jwtMiddleware from 'koa-jwt';
 import authRouter from './controllers/auth.controller';
 
 // === services ===
-import getUser from './service/auth/getUser'
+import getUser from './service/auth/getUser';
 
 // === graphql ===
 import { ApolloServer } from 'apollo-server-koa';
-import schema from './graphql/schema'
+import schema from './graphql/schema';
 
 // === env ===
 import { config } from 'dotenv';
@@ -44,11 +44,11 @@ const apollo = new ApolloServer({
   context: async ({ ctx }) => {
     return {
       user: await getUser(ctx?.state?.user?.id),
-      koa: ctx
-    }
+      koa: ctx,
+    };
   },
-  debug: true // dev ? true : false
-})
+  debug: true, // dev ? true : false
+});
 
 async function createApp() {
   const app = new Koa<ICustomAppState, ICustomAppContext>();
@@ -68,10 +68,10 @@ async function createApp() {
     .use(
       jwtMiddleware({
         secret: process.env.SECRET as string,
-        passthrough: true
+        passthrough: true,
       }),
     )
-    .use(apollo.getMiddleware())
+    .use(apollo.getMiddleware());
   return { server: app, db };
 }
 
@@ -79,7 +79,9 @@ if (require.main === module) {
   createApp().then(({ server }) => {
     server.listen(getPort()).on('listening', () => {
       console.log(`Listening on: http://localhost:${getPort()}/api/`);
-      console.log(`GraphQL on: http://localhost:${getPort()}${apollo.graphqlPath}`);
+      console.log(
+        `GraphQL on: http://localhost:${getPort()}${apollo.graphqlPath}`,
+      );
     });
   });
 }
