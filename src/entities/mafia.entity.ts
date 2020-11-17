@@ -6,6 +6,21 @@ export class Mafia extends Character implements IMafia {
     super(_id);
   }
 
-  public killsCount: number = 0;
-  public isPeaceful: false = false;
+  private _killCounter: number = 0;
+
+  private murderVote(character: Character): void {
+    throw new Error('murderVote method in ' + this.constructor.name);
+  }
+
+  public vote(character: Character): void {
+    this.murderVote(character);
+  }
+
+  public get killCounter(): number {
+    return this._killCounter;
+  }
+
+  public set killCounter(value: number) {
+    this._killCounter = value;
+  }
 }

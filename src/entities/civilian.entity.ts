@@ -5,6 +5,4 @@ export class Civilian extends Character implements ICivilian {
   constructor(private readonly _id: string) {
     super(_id);
   }
-
-  public isPeaceful: true = true;
 }

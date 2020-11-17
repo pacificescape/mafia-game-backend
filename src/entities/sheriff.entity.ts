@@ -6,6 +6,26 @@ export class Sheriff extends Character implements ISheriff {
     super(_id);
   }
 
-  public isPeaceful: false = false;
-  public killsCount: number = 0;
+  private _killCounter: number = 0;
+
+  public checkPeaceful(character: Character): boolean {
+    return character.isPeaceful;
+  }
+
+  public killCharacter(character: Character): void {
+    if (character.hasShield) {
+      throw new Error('Cannot kill character with shield');
+    }
+
+    character.isAlive = false;
+    this.killCounter += 1;
+  }
+
+  public get killCounter(): number {
+    return this._killCounter;
+  }
+
+  public set killCounter(value: number) {
+    this._killCounter = value;
+  }
 }

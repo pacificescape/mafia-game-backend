@@ -7,4 +7,6 @@ export interface ICharacterBase extends IBase {
   // prostitute can kills players by infecting them with AIDS
   // for example: prostitute infects someone and then after 2 days he dies
   readonly isSick: boolean;
+  // every character has `isPeaceful` prop, but every character also overrides this prop specifying type(strict true or strict false)
+  readonly isPeaceful: boolean;
 }

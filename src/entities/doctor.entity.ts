@@ -6,6 +6,22 @@ export class Doctor extends Character implements IDoctor {
     super(_id);
   }
 
-  public isPeaceful: true = true;
-  public hasAid: boolean = false;
+  private _healCounter: number = 0;
+
+  public heal(character: Character): void {
+    if (character.hasShield) {
+      throw new Error('Cannot heal character with shield');
+    }
+
+    character.hasShield = true;
+    this.healCounter += 1;
+  }
+
+  public get healCounter(): number {
+    return this._healCounter;
+  }
+
+  public set healCounter(value: number) {
+    this._healCounter = value;
+  }
 }
