@@ -12,6 +12,8 @@ export class Lobby implements IGame {
 
   private _players: IPlayer[] = [];
   private _messages: IMessage[] = [];
+  private readonly _minPlayers: number = 7;
+  private readonly _maxPlayers: number = 16;
 
   private static countPlayers(lobby: Lobby): number {
     return lobby.players.length;
@@ -42,5 +44,13 @@ export class Lobby implements IGame {
 
   public set messages(value: IMessage[]) {
     this._messages = value;
+  }
+
+  public get minPlayers(): number {
+    return this._minPlayers;
+  }
+
+  public get maxPlayers(): number {
+    return this._maxPlayers;
   }
 }
