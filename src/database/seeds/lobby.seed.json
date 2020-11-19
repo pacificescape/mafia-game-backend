@@ -1,0 +1,66 @@
+[
+  {
+    "players": ["5fabab5f0401bcd47730d306", "5fabab5f0401bcd47730d300"],
+    "messages": [
+      {
+        "userId": "5fabab5f0401bcd47730d306",
+        "createdAt": "1599341584000",
+        "text": "Universal mobile task-force"
+      },
+      {
+        "userId": "5fabab5f0401bcd47730d308",
+        "createdAt": "1599341584000",
+        "text": "Persistent zero tolerance hardware"
+      },
+      {
+        "userId": "5fabab5f0401bcd47730d300",
+        "createdAt": "1599341584000",
+        "text": "Enterprise-wide user-facing moderator"
+      }
+    ]
+  },
+  {
+    "players": ["5fabab5f0401bcd47730d307", "5fabab5f0401bcd47730d307"],
+    "messages": [
+      {
+        "userId": "5fabab5f0401bcd47730d307",
+        "createdAt": "1599341584000",
+        "text": "Universal mobile task-force"
+      },
+      {
+        "userId": "5fabab5f0401bcd47730d307",
+        "createdAt": "1599341584000",
+        "text": "Grass-roots neutral methodology"
+      }
+    ]
+  },
+  {
+    "players": [
+      "5fabab5f0401bcd47730d307",
+      "5fabab5f0401bcd47730d30d",
+      "5fabab5f0401bcd47730d304"
+    ],
+    "messages": [
+      {
+        "userId": "5fabab5f0401bcd47730d307",
+        "createdAt": "1599341584000",
+        "text": "Universal mobile task-force"
+      },
+      {
+        "userId": "5fabab5f0401bcd47730d30d",
+        "createdAt": "1599341584000",
+        "text": "Universal mobile task-force"
+      },
+      {
+        "userId": "5fabab5f0401bcd47730d304",
+        "createdAt": "1599341584000",
+        "text": "Universal mobile task-force"
+      },
+      {
+        "userId": "5fabab5f0401bcd47730d2fe",
+        "createdAt": "1599341584000",
+        "text": "Lorem ipsum dolor set amen"
+      }
+    ]
+  }
+]
