@@ -1,9 +1,14 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLList,
+  GraphQLID,
+} from 'graphql';
 
 export const GameType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Game',
   fields: () => ({
-    id: { type: GraphQLString },
+    id: { type: GraphQLID },
     name: { type: GraphQLString },
     players: { type: new GraphQLList(PlayerType) },
   }),
@@ -12,7 +17,7 @@ export const GameType: GraphQLObjectType = new GraphQLObjectType({
 export const PlayerType: GraphQLObjectType = new GraphQLObjectType({
   name: 'Player',
   fields: () => ({
-    id: { type: GraphQLString },
+    id: { type: GraphQLID },
     name: { type: GraphQLString },
     players: { type: new GraphQLList(PlayerType) },
   }),

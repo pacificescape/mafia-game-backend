@@ -3,6 +3,7 @@ import {
   GraphQLObjectType,
   GraphQLList,
   GraphQLInt,
+  GraphQLID,
 } from 'graphql';
 import { UserType } from '../types/user.type';
 import { AuthenticationError } from 'apollo-server-koa';
@@ -22,7 +23,7 @@ const UserQuery: GraphQLObjectType = new GraphQLObjectType({
     getUserById: {
       description: 'Returns a `User` where `User.id = id` in database.',
       type: UserType,
-      args: { id: { type: GraphQLString } },
+      args: { id: { type: GraphQLID } },
       resolve(_, { id }, ctx) {
         return ctx.koa.db.User.findById(id);
       },
