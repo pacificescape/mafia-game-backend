@@ -1,16 +1,16 @@
 import { GraphQLObjectType, GraphQLID } from 'graphql';
-import { UserType } from '../types/user.type';
+import { LobbyType } from '../types/lobby.type';
 
 const LobbyQuery: GraphQLObjectType = new GraphQLObjectType({
-  description: 'Query to interact with `Games` collection',
+  description: 'Query to interact with `Lobby` collection',
   name: 'LobbyQuery',
   fields: {
-    getLobby: {
-      description: 'Returns a list of active games.',
-      type: UserType,
+    getLobbyById: {
+      description: 'Returns a `Lobby` where `Lobby.id = id` in database.',
+      type: LobbyType,
       args: { id: { type: GraphQLID } },
-      resolve() {
-        return {};
+      resolve(_, { id }, ctx) {
+        return ctx.koa.db.Lobby.findById(id);
       },
     },
   },
