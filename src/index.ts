@@ -7,6 +7,9 @@ import jwtMiddleware from 'koa-jwt';
 // === controllers ===
 import authRouter from './controllers/auth.controller';
 
+// === database ===
+import db from './database/database';
+
 // === services ===
 import getUser from './service/auth/getUser';
 
@@ -19,14 +22,13 @@ import { config } from 'dotenv';
 
 // === utils ===
 import { getPort } from './shared/utils/process.util';
+import { __prod__ } from './constants';
 
 // === interfaces ===
 import {
   ICustomAppState,
   ICustomAppContext,
 } from './shared/interfaces/customContext.interface';
-
-import db from './database/database';
 
 config();
 
@@ -47,13 +49,15 @@ const apollo = new ApolloServer({
       koa: ctx,
     };
   },
-  debug: true, // dev ? true : false
+  debug: __prod__,
 });
 
 async function createApp() {
   const app = new Koa<ICustomAppState, ICustomAppContext>();
 
   await initDb();
+
+  // app.ws.use(route)
 
   app
     .use(async (ctx, next) => {
