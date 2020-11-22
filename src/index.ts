@@ -43,6 +43,9 @@ const initDb = () =>
 
 const apollo = new ApolloServer({
   schema,
+  introspection: true,
+  playground: true,
+  tracing: true,
   context: async ({ ctx }) => {
     return {
       user: await getUser(ctx.state?.user?.id),
@@ -82,9 +85,11 @@ async function createApp() {
 if (require.main === module) {
   createApp().then(({ server }) => {
     server.listen(getPort()).on('listening', () => {
-      console.log(`Listening on: http://localhost:${getPort()}/api/`);
+      console.log(`🚀 Server ready at: http://localhost:${getPort()}/api/`);
       console.log(
-        `GraphQL on: http://localhost:${getPort()}${apollo.graphqlPath}`,
+        `👾 GraphQL ready on: http://localhost:${getPort()}${
+          apollo.graphqlPath
+        }`,
       );
     });
   });
