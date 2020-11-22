@@ -1,10 +1,10 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 
-const MessageSchema: Schema = new Schema({
-  userId: String,
-  createdAt: String,
-});
+const MessageSchema: Schema = new Schema(
+  {
+    userId: String,
+  },
+  { timestamps: true },
+);
 
-const Message = mongoose.model('Message', MessageSchema);
-
-export default Message;
+export default MessageSchema;
