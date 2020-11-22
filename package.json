@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "start": "pm2 start process.yml",
+    "start": "pm2-runtime start process.yml --env production",
     "stop": "pm2 kill",
     "start:dev": "tsc -w & nodemon ./dist/index.js",
     "format": "prettier --write \"src/**/*.ts\"",
